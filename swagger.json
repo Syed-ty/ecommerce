@@ -1,0 +1,883 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Ecommerce",
+    "description": " Buying and Selling of goods and services via internet "
+  },
+
+  "host": "localhost:2300",
+  "basePath": "/",
+  "tags": [{
+      "name": "Auth",
+      "description": "Authentication routes"
+    },
+    {
+      "name": "Cart",
+      "description": "Cart routes"
+    },
+    {
+      "name": "Payment",
+      "description": "Payment routes"
+    },
+    {
+      "name": "Product",
+      "description": "Product routes"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+
+  "definitions": {
+    "register": {
+      "type": "object",
+      "properties": {
+        "fullname": {
+          "type": "string",
+          "description": " To register, you must provide your full name.",
+          "example": "Write your fullname"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email id to login",
+          "example": "example@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "description": "Enter a valid password",
+          "example": "example@123"
+        },
+        "role": {
+          "type": "string",
+          "description": "Role of user",
+          "example": "User "
+        }
+      }
+    },
+    "login": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Registrant's e-mail address",
+          "example": "example@gmail.com"
+        },
+        "password": {
+          "type": "String",
+          "description": "Enter your registration password",
+          "example": "example@123"
+        }
+      }
+    },
+    "Product": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "description":"Product id is the uniqiue identifier",
+          "example":"Samsung123"
+        }
+        
+      },
+      "title": "Product"
+    },
+
+    "addcartDetails": {
+      "type": "object",
+      "properties": {
+        "cartData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Product"
+          }
+        }       
+      }
+    },
+    "UpdatecartdDetails": {
+      "type": "object",
+      "properties": {
+        "cartData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Product"
+          }
+        }       
+      }
+    },
+
+    "addproductToCart": {
+      "type": "object",
+      "properties": {
+        "cartData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Product"
+          }
+        }       
+      }
+    },
+  
+    
+    
+    "deleteProductFormCart": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "String",
+          "description": " Enter the  Id generated for payment ",
+          "example": "621213d90ff2a428dc27a6e2"
+        }
+      }
+    },
+    " getcart-dataById": {
+      "_id": {
+        "type": "String",
+        "description": " productId of the cart ",
+        "example": "621318b8ecb8fc3a8871506f"
+      }
+
+    },
+    " getpaymentDetailsById": {
+      "_id": {
+        "type": "String",
+        "description": " Enter your card details ",
+        "example": "621318b8ecb8fc3a8871234f"
+      }
+
+    },
+    "addpaymentDetails": {
+      "type": "object",
+      "properties": {
+        "cardName": {
+          "type": "string",
+          "description": "Using a debit or credit card",
+          "example": "Visa card or Master card"
+        },
+        "cvv": {
+          "type": "String",
+          "description": "card's unique cvv number",
+          "example": "856"
+        }
+      }
+    },
+    "UpdatepaymentdDetails": {
+      "type": "object",
+      "properties": {
+        "cardName": {
+          "type": "string",
+          "description": "Using a debit or credit card",
+          "example": "Visa card or Master card"
+        },
+        "cvv": {
+          "type": "String",
+          "description": "card's unique cvv number",
+          "example": "856"
+        }
+      }
+    },
+    "DeletepaymentdDetails": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "String",
+          "description": " Enter the  Id generated for payment ",
+          "example": "621213d90ff2a428dc27a6e2"
+        }
+      }
+    },
+    "getProductDetailsById": {
+      "_id": {
+        "type": "String",
+        "description": " Enter  the product Id ",
+        "example": "621318b8ecb8fc3a8871234f"
+      }
+    },
+
+    "UpdateproductdDetails": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name of the product",
+          "example": " Mobile phone"
+        },
+        "price": {
+          "type": "String",
+          "description": "price of the product",
+          "example": "1000 rupees"
+        },
+        "quantity": {
+          "type": "String",
+          "description": "The product's quantity",
+          "example": "04 numbers"
+        }
+      }
+
+
+    },
+
+    "addproductDetails": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name of the product",
+          "example": " Mobile phone"
+        },
+        "price": {
+          "type": "String",
+          "description": "price of the product",
+          "example": "1000 rupees"
+        },
+        "quantity": {
+          "type": "String",
+          "description": "The product's quantity",
+          "example": "04 numbers"
+        },
+        "imgUrl": {
+          "type": "String",
+          "description": "The imagepath of the product",
+          "example": "https://www.google.com/aclk?sa=l&ai=DC"
+        }
+      }
+
+
+    },
+    "DeleteproductdDetails": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "String",
+          "description": " Enter the  Id generated for product ",
+          "example": "621213d90ff2a428dc27a6e2"
+        }
+      }
+    }
+
+  },
+  "securityDefinitions": {
+    "JWT": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": ["Auth"],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "description": "Register User",
+          "required": true,
+          "type": "object",
+          "schema": {
+            "$ref": "#/definitions/register"
+          }
+        }],
+        "summary": "Register the User",
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Page Not Found or File Not Found"
+          },
+          "401": {
+            "description": "Unauthorized user or admin"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "description": "Login User",
+          "required": true,
+          "type": "object",
+          "schema": {
+            "$ref": "#/definitions/login"
+          }
+        }],
+        "summary": "Register the User",
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Page Not Found or File Not Found"
+          },
+          "401": {
+            "description": "Unauthorized user or admin"
+          }
+        }
+
+      }
+    },
+    "/cart/add-cart-data": {
+      "post": {
+        "tags": ["Cart"],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "description": "productId is the unique identifier for a single product ",
+          "required": true,
+          "type": "array",
+          "schema": {
+            "$ref": "#/definitions/addcartDetails"
+          }
+        }],
+        "security": [{
+          "JWT": []
+        }],
+        "summary": " Addcart details of the User",
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Page Not Found or File Not Found"
+          },
+          "401": {
+            "description": "Unauthorized user "
+          }
+        }
+      }
+    },
+    "/cart/get-cart-dataById/{id}": {
+      "get": {
+        "tags": ["Cart"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "get the  cart  ",
+          "required": true,
+          "type": "string",
+          "schema": {
+            "$ref": "#/definitions/getcart-dataById"
+          }
+        }],
+        "security": [{
+          "JWT": []
+        }],
+        "summary": " Get the cart ",
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Page Not Found or File Not Found"
+          },
+          "401": {
+            "description": "Unauthorized user "
+          }
+        }
+      }
+    },
+    "/cart/cart-data": {
+      "get": {
+        "tags": ["Cart"],
+        "parameters": [
+       
+      ],
+        "security": [{
+          "JWT": []
+        }],
+        "summary": " Get allcart details  ",
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Page Not Found or File Not Found"
+          },
+          "401": {
+            "description": "Unauthorized user "
+          }
+        }
+      }
+    },
+    "/cart/update-cart-data/{id}": {
+      "put": {
+        "tags": ["Cart"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Update the cart",
+          "required": true,
+          "type": "string"
+        },
+          {
+          "name": "body",
+          "in": "body",
+          "description": "Update the cart ",
+          "required": true,
+          "type": "object",
+          "schema": {
+            "$ref": "#/definitions/UpdatecartdDetails"
+          }
+        }],
+        "security": [{
+          "JWT": []
+        }],
+        "summary": " Update cart details of the User",
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Page Not Found or File Not Found"
+          },
+          "401": {
+            "description": "Unauthorized user "
+          }
+        }
+      }
+    },
+    "/cart/add-cart-data/{id}": {
+      "post": {
+        "tags": ["Cart"],
+        "parameters": [
+         
+          {
+          "name": "body",
+          "in": "body",
+          "description": "Add product to cart ",
+          "required": true,
+          "type": "object",
+          "schema": {
+            "$ref": "#/definitions/addproductToCart"
+          }
+        },
+        {
+          "name": "id",
+          "in": "path",
+          "description": " Add  the cart",
+          "required": true,
+          "type": "string"
+        }],
+        "security": [{
+          "JWT": []
+        }],
+        "summary": " Add product to cart ",
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Page Not Found or File Not Found"
+          },
+          "401": {
+            "description": "Unauthorized user "
+          }
+        }
+      }
+    },
+    "/cart/delete-product/{id}": {
+      "delete": {
+        "tags": ["Cart"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Delete product from cart ",
+          "required": true,
+          "type": "string",
+          "schema": {
+            "$ref": "#/definitions/deleteProductFormCart"
+          }
+        }],
+        "security": [{
+          "JWT": []
+        }],
+        "summary": " Delete product  from cart",
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Page Not Found or File Not Found"
+          },
+          "401": {
+            "description": "Unauthorized user "
+          }
+        }
+      }
+    },
+    "/payment/add-payment-data": {
+      "post": {
+        "tags": ["Payment"],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "description": " Add payment details ",
+          "required": true,
+          "type": "object",
+          "schema": {
+            "$ref": "#/definitions/addpaymentDetails"
+          }
+        }],
+        "security": [{
+          "JWT": []
+        }],
+        "summary": " Payment details added Sucessfull",
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Page Not Found or File Not Found"
+          },
+          "401": {
+            "description": "Unauthorized user "
+          }
+        }
+      }
+    },
+    "/payment/payment-data/{id}": {
+
+      "get": {
+        "tags": ["Payment"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "get the  payment  ",
+          "required": true,
+          "type": "string",
+          "schema": {
+            "$ref": "#/definitions/getpaymentDetailsById"
+          }
+        }],
+        "security": [{
+          "JWT": []
+        }],
+        "summary": " Get the payment ",
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Page Not Found or File Not Found"
+          },
+          "401": {
+            "description": "Unauthorized user "
+          }
+        }
+      }
+    },
+    "/payment/payment-data": {
+
+      "get": {
+        "tags": ["Payment"],
+        "parameters": [
+      ],
+        "security": [{
+          "JWT": []
+        }],
+        "summary": " Get all  the payment details ",
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Page Not Found or File Not Found"
+          },
+          "401": {
+            "description": "Unauthorized user "
+          }
+        }
+      }
+    },
+    "/payment/update-payment-data/{id}": {
+      "put": {
+        "tags": ["Payment"],
+        "parameters": [{
+            "name": "id",
+            "in": "path",
+            "description": "Update the product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": " Update payment details ",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/UpdatepaymentdDetails"
+            }
+          }
+        ],
+        "security": [{
+          "JWT": []
+        }],
+        "summary": " Payment details updated Sucessfull",
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Page Not Found or File Not Found"
+          },
+          "401": {
+            "description": "Unauthorized user "
+          }
+        }
+      }
+    },
+    "/payment/delete-payment-data/{id}": {
+      "delete": {
+        "tags": ["Payment"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": " Delete payment details ",
+          "required": true,
+          "type": "string",
+          "schema": {
+            "$ref": "#/definitions/DeletepaymentdDetails"
+          }
+        }],
+        "security": [{
+          "JWT": []
+        }],
+        "summary": " Payment details deleted Sucessfull",
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Page Not Found or File Not Found"
+          },
+          "401": {
+            "description": "Unauthorized user "
+          }
+        }
+      }
+    },
+
+    "/product/add-product-data": {
+
+      "post": {
+
+        "tags": ["Product"],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "description": "Add the  product  ",
+          "required": true,
+          "type": "object",
+          "schema": {
+            "$ref": "#/definitions/addproductDetails"
+          }
+        }],
+        "security": [{
+          "JWT": []
+        }],
+        "summary": " Add the product ",
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Page Not Found or File Not Found"
+          },
+          "401": {
+            "description": "Unauthorized user "
+          }
+        }
+      }
+    },
+    "/product/get-product-dataById/{id}": {
+
+      "get": {
+        "tags": ["Product"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "get the  product  ",
+          "required": true,
+          "type": "string",
+          "schema": {
+            "$ref": "#/definitions/getProductDetailsById"
+          }
+        }],
+        "security": [{
+          "JWT": []
+        }],
+        "summary": " Get the product ",
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Page Not Found or File Not Found"
+          },
+          "401": {
+            "description": "Unauthorized user "
+          }
+        }
+      }
+    },
+    "/product/get-product-data": {
+
+      "get": {
+        "tags": ["Product"],
+        "parameters": [
+       
+      ],
+        "security": [{
+          "JWT": []
+        }],
+        "summary": " Get the product ",
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Page Not Found or File Not Found"
+          },
+          "401": {
+            "description": "Unauthorized user "
+          }
+        }
+      }
+    },
+    "/product/update-product-data/{id}": {
+      "put": {
+        "tags": ["Product"],
+        "parameters": [{
+            "name": "id",
+            "in": "path",
+            "description": "Update the product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update the product ",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/UpdateproductdDetails"
+            }
+          }
+        ],
+        "security": [{
+          "JWT": []
+        }],
+        "summary": " Update the product ",
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Page Not Found or File Not Found"
+          },
+          "401": {
+            "description": "Unauthorized user "
+          }
+        }
+      }
+    },
+    "/product/delete-data/{id}": {
+      "delete": {
+        "tags": ["Product"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Delete  the  product  ",
+          "required": true,
+          "type": "string",
+          "schema": {
+            "$ref": "#/definitions/DeleteproductdDetails"
+          }
+        }],
+        "security": [{
+          "JWT": []
+        }],
+        "summary": " Delete the product ",
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Page Not Found or File Not Found"
+          },
+          "401": {
+            "description": "Unauthorized user "
+          }
+        }
+      }
+    }
+  }
+ 
+}
